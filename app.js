@@ -1,3 +1,4 @@
+require('rootpath')();
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -7,7 +8,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
+
+
+var expressJwt = require('express-jwt');
+var config = require('config.json');
 var expressSession = require('express-session');
+var session = require('express-session');
+
+
 var routes = require('./routes/index')(passport);
 
 var db = require('./db');
@@ -21,7 +29,15 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+
+//var engines = require('consolidate');
+//app.engine('jade', engines.jade);
+//app.engine('ejs', engines.ejs);
+//app.set('view engine', 'jade');
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'ejs');
+
+
 
 // set up port
     app.set('port', process.env.PORT || 3030);
@@ -43,11 +59,31 @@ app.use(passport.session());
 var flash = require('connect-flash');
 app.use(flash());
 
+
+// Angular authorization
+app.use(session({ secret: config.secret, resave: false, saveUninitialized: true }));
+
+// use JWT auth to secure the api
+app.use('/api', expressJwt({ secret: config.secret }).unless({ path: ['/api/users/authenticate', '/api/users/register'] }));
+
+// routes
+app.use('/login', require('./controllers/login.controller'));
+app.use('/register', require('./controllers/register.controller'));
+app.use('/app', require('./controllers/app.controller'));
+app.use('/api/users', require('./controllers/api/users.controller'));
+
+// make '/app' default route
+app.get('/', function (req, res) {
+    return res.redirect('/app');
+});
+
+
+
 // Initialize Passport
 var initPassport = require('./passport/init');
 initPassport(passport);
 
-app.use('/', routes);
+//app.use('/', routes);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

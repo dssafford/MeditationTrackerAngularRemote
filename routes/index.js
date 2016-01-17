@@ -39,53 +39,53 @@ module.exports = function(passport) {
 
 
 
-    /* GET login page. */
-    router.get('/', function(req, res) {
-        // Display the Login page with any flash message, if any
-        res.render('index', { message: req.flash('message') });
-    });
+    // /* GET login page. */
+    // router.get('/', function(req, res) {
+    //     // Display the Login page with any flash message, if any
+    //     res.render('index', { message: req.flash('message') });
+    // });
 
-    /* Handle Login POST */
-    router.post('/login', passport.authenticate('login', {
-        successRedirect: '/entrylist',
-        failureRedirect: '/',
-        failureFlash : true  
-    }));
+    // /* Handle Login POST */
+    // router.post('/login', passport.authenticate('login', {
+    //     successRedirect: '/entrylist',
+    //     failureRedirect: '/',
+    //     failureFlash : true  
+    // }));
 
-    /* GET Registration Page */
-    router.get('/register', function(req, res){
-        res.render('register',{message: req.flash('message')});
-    });
+    // /* GET Registration Page */
+    // router.get('/register', function(req, res){
+    //     res.render('register',{message: req.flash('message')});
+    // });
 
-    /* Handle Registration POST */
-    router.post('/register', passport.authenticate('register', {
-        successRedirect: '/home',
-        failureRedirect: '/register',
-        failureFlash : true  
-    }));
+    // /* Handle Registration POST */
+    // router.post('/register', passport.authenticate('register', {
+    //     successRedirect: '/home',
+    //     failureRedirect: '/register',
+    //     failureFlash : true  
+    // }));
 
-    /* GET Home Page */
-    router.get('/home', isAuthenticated, function(req, res){
-        res.render('home', { user: req.user });
-    });
+    // /* GET Home Page */
+    // router.get('/home', isAuthenticated, function(req, res){
+    //     res.render('home', { user: req.user });
+    // });
 
-    /* GET Home Page */
-    router.get('/homeold', isAuthenticated, function(req, res){
-        res.render('homeold', { user: req.user });
-    });
+    // /* GET Home Page */
+    // router.get('/homeold', isAuthenticated, function(req, res){
+    //     res.render('homeold', { user: req.user });
+    // });
 
-    /* Handle Logout */
-    router.get('/logout', isAuthenticated, function(req, res) {
-        console.log("in logout, user=" + req.user.username);
+    // /* Handle Logout */
+    // router.get('/logout', isAuthenticated, function(req, res) {
+    //     console.log("in logout, user=" + req.user.username);
         
-        // log the logout
-        logUser(req.user.username, "out")
-        req.logout();
+    //     // log the logout
+    //     logUser(req.user.username, "out")
+    //     req.logout();
 
 
 
-        res.redirect('home');
-    });
+    //     res.redirect('home');
+    // });
 
     /* GET Entry List Page */
     router.get('/entrylist', isAuthenticated, function(req, res){
