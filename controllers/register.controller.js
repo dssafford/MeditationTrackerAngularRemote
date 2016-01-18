@@ -15,6 +15,7 @@ router.post('/', function (req, res) {
         json: true
     }, function (error, response, body) {
         if (error) {
+            console.log()
             return res.render('register', { error: 'An error occurred' });
         }
 

@@ -1,6 +1,8 @@
 ﻿(function () {
     'use strict';
 
+    console.log("In index.controller.js  Account ")
+
     angular
         .module('app')
         .controller('Account.IndexController', Controller);

@@ -21,6 +21,8 @@ module.exports = service;
 function authenticate(username, password) {
     var deferred = Q.defer();
 
+    console.log("in user.service.js authenticate");
+
     usersDb.findOne({ username: username }, function (err, user) {
         if (err) deferred.reject(err);
 

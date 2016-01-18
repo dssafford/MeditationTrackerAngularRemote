@@ -1,12 +1,18 @@
 ﻿(function () {
     'use strict';
 
+    console.log("in app.js function");
+
     angular
         .module('app', ['ui.router'])
         .config(config)
         .run(run);
 
     function config($stateProvider, $urlRouterProvider) {
+
+        console.log("In app.js urlRouterProvider: "+ $urlRouterProvider);
+        console.log("in app.js: stateProvider: " + $stateProvider);
+
         // default route
         $urlRouterProvider.otherwise("/");
 
@@ -24,6 +30,13 @@
                 controller: 'Account.IndexController',
                 controllerAs: 'vm',
                 data: { activeTab: 'account' }
+            })
+            .state('doug', {
+                url: '/doug',
+                templateUrl: 'doug/index.html',
+                controller: 'Doug.IndexController',
+                controllerAs: 'vm',
+                data: { activeTab: 'doug' }
             });
     }
 

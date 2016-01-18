@@ -34,6 +34,11 @@ router.post('/', function (req, res) {
 
         // redirect to returnUrl
         var returnUrl = req.query.returnUrl && decodeURIComponent(req.query.returnUrl) || '/';
+
+        console.log("returnUrl =: "+ returnUrl);
+
+        //returnUrl = "doug.html";
+
         res.redirect(returnUrl);
     });
 });

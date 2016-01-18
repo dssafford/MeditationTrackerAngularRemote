@@ -1,11 +1,13 @@
-﻿(function () {
+(function () {
     'use strict';
 
-console.log("In IndexController");
+    console.log("In IndexController");
 
     angular
         .module('app')
-        .controller('Home.IndexController', Controller);
+        .controller('Doug.IndexController', Controller);
+
+    console.log("In IndexController");
 
     function Controller(UserService) {
         var vm = this;
@@ -15,6 +17,7 @@ console.log("In IndexController");
         initController();
 
         function initController() {
+            console.log("In IndexController initController");
             // get current user
             UserService.GetCurrent().then(function (user) {
                 vm.user = user;

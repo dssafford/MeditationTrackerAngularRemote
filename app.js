@@ -27,16 +27,16 @@ var db = require('./db');
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
+
 
 //var engines = require('consolidate');
 //app.engine('jade', engines.jade);
 //app.engine('ejs', engines.ejs);
 //app.set('view engine', 'jade');
-app.engine('html', require('ejs').renderFile);
+//app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
-
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
 
 
 // set up port
