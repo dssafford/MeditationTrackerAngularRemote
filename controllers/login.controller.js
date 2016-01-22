@@ -22,6 +22,7 @@ router.post('/', function (req, res) {
         json: true
     }, function (error, response, body) {
         if (error) {
+            console.log("ERROR: In router.post for useers/authenticate. error:" + error);
             return res.render('login', { error: 'An error occurred' });
         }
 
